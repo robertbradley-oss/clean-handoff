@@ -1,0 +1,9 @@
+/.codex-handoff/
+.DS_Store
+Thumbs.db
+node_modules/
+*.log
+
+# Local validation and packaging scratch space.
+.validation/
+.release-staging/
