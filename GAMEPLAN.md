@@ -64,7 +64,72 @@ Each write-based lettered phase requires an exact Approved Execution Slice. The 
 
 ## Approved Execution Slice
 
-None approved. The Skills-repository publication slice closed on 2026-07-23 with direct evidence in `.gameplan/reports/2026-07-22-skills-repository-publication.md`.
+### Phase H — Direct Handoff Latency Reduction and Pull Request
+
+Status: **approved on 2026-07-25** by the user's exact statement: “I explicitly approve the complete proposed Phase H slice in GAMEPLAN.md.”
+
+Evidence basis:
+
+- A 20-run local timing probe measured the installed helper at a 60.8 ms median; the helper and canonical source bytes match.
+- `git status --short --branch` averaged 35.5 ms in the inspected workspace, while saved-project listing took approximately 0.8 seconds.
+- The live `GAMEPLAN.md` is materially larger than the compact handoff prompt, and the current Direct workflow orders workspace inspection, saved-project listing, preparation, and task creation sequentially.
+- These observations indicate that agent orchestration, unnecessary source-side inspection, and optional Git worktree provisioning are more meaningful latency targets than the deterministic helper. Client-owned worktree setup remains outside the helper and is not assigned an invented performance claim.
+
+Objective: Reduce perceived Direct Handoff latency through one small, reviewable PR to canonical `robertbradley-oss/clean-handoff`: overlap independent read-only preflight work, bound source inspection to the evidence needed for the eight-field handoff, preserve the safe Git-worktree default, and document an explicit saved-project-direct option for users who knowingly prefer lower setup latency over checkout isolation.
+
+Allowed workspace writes:
+
+- `GAMEPLAN.md`
+- `README.md`
+- `skills/clean-handoff/references/workflows/new-task.md`
+- `skills/clean-handoff/tests/package-boundary.test.mjs`
+- `.gameplan/reports/2026-07-25-phase-h-direct-handoff-latency.md`
+- `.gameplan/footprints/2026-07-25-phase-h-direct-handoff-latency.md`
+- `.gameplan/footprints/2026-07-21-clean-handoff-standalone-compiled.md`
+- `.gameplan/tmp/phase-h/`
+
+Approved external mutations:
+
+- Clone exact canonical main commit `b61e474ffcd26e0ef1d44abf7ab6eb69f220c33a` only under `.gameplan/tmp/phase-h/pr-worktree/`, create branch `codex/faster-direct-handoff`, and push that branch normally to `robertbradley-oss/clean-handoff` without force.
+- Open one ready pull request from `codex/faster-direct-handoff` to `main` titled `Speed up Direct Handoff orchestration`, then observe its CI. Do not merge, close, reopen, label, assign, release, or otherwise mutate the repository beyond that branch and pull request.
+
+Constraints:
+
+- Keep Direct and Portable Handoff as the only active workflows. The faster behavior is part of Direct Handoff, not a third workflow, mode schema, command, or persistent state protocol.
+- Do not change the helper, schemas, context fields, redaction, project-selection safety, output bound, zero-write behavior, or exactly-one-call/no-automatic-retry task policy. If implementation requires any runtime `.mjs` change, stop and propose an amendment.
+- Start saved-project listing and bounded live workspace inspection concurrently when the client can issue independent read-only calls together. The inspection may use current conversation context, the live root `GAMEPLAN.md` sections needed to establish authority and current work, concise Git status, and directly relevant validation evidence. Do not require repository-wide inventory, historical-evidence reads, test execution, or unrelated file scans unless material uncertainty makes one necessary.
+- Preserve destination-side live repository and canonical `GAMEPLAN.md` inspection. Source-side acceleration must not transfer approval, trust stale plan context, guess project identity, weaken redaction, or skip a clear confirmation on meaningful uncertainty.
+- Preserve the task tool's isolated worktree default for Git projects. Use the saved project directly only when the user explicitly requests that exact local/shared-checkout behavior; explain that it avoids worktree provisioning but allows the old and new tasks to share one checkout. Never silently select local execution as a speed optimization.
+- Preserve Portable Handoff behavior unchanged except for documentation that is strictly necessary to distinguish it from Direct Handoff.
+- Treat the installed skill at `C:/Users/robby/.codex/skills/clean-handoff/`, Codex configuration, all existing tasks, the current stale source branch, protected untracked evidence, the external recovery directory, the umbrella Skills repository, and every unrelated path as read-only.
+- Do not install or overwrite the skill, create or archive a validation task, alter the current checkout's branch or index, modify canonical `main`, merge the PR, create a tag or release, publish a package, force-push, or delete material. Any base-branch drift, branch-name collision, existing matching PR, unexpected diff, failed validation, or CI failure stops the slice without retry or scope expansion.
+
+Completion criteria:
+
+1. The Direct workflow explicitly directs capable clients to overlap saved-project listing with bounded live inspection and forbids nonessential broad inspection while retaining the exact eight-field context, live GamePlan authority, exact project match, one task call, no automatic retry, bounded redaction, and honest result reporting.
+2. Git task creation still defaults to an isolated worktree; saved-project-direct execution is documented as an explicit user opt-in with its shared-checkout concurrency risk, and no local execution is inferred merely from a request for speed.
+3. The helper and every runtime `.mjs` file remain byte-identical to base commit `b61e474ffcd26e0ef1d44abf7ab6eb69f220c33a`; Direct and Portable schemas and output text remain unchanged.
+4. Focused package-boundary coverage directly asserts the concurrency, bounded-inspection, default-isolation, explicit-local-opt-in, exactly-one-call, no-retry, and no-persistent-state contracts; the complete standalone suite, syntax checks, public help, official validator, and whitespace checks pass locally.
+5. The committed PR diff contains only `GAMEPLAN.md`, `README.md`, `skills/clean-handoff/references/workflows/new-task.md`, and `skills/clean-handoff/tests/package-boundary.test.mjs`; no generated, installed, historical, recovery, cache, or unrelated file is committed.
+6. One ready PR targets canonical `main`, contains the measured evidence and limitations without promising an unmeasured end-to-end latency, and all six Windows/macOS/Linux by Node 22/24 CI jobs pass at its final exact head.
+7. The Phase H report maps direct evidence to every criterion, the Phase H footprint and rebuilt compiled footprint are finalized, task-owned `.gameplan/tmp/phase-h/` content is absent, protected pre-existing state remains unchanged, and one targeted GamePlan Update returns `Approved Execution Slice` to `None approved` while recording the open PR as the durable outcome.
+
+Exact validation and PR sequence after approval:
+
+1. Re-read the complete live root `GAMEPLAN.md`; capture `git status --short --untracked-files=all`; query canonical repository identity, main head, open PRs, and branch names; require main to remain exactly `b61e474ffcd26e0ef1d44abf7ab6eb69f220c33a`, no open matching PR, and no `codex/faster-direct-handoff` branch.
+2. Create the Phase H footprint before the first execution mutation, mark the existing compiled footprint active, then run `git clone --no-tags --single-branch --branch main https://github.com/robertbradley-oss/clean-handoff.git .gameplan/tmp/phase-h/pr-worktree`; require cloned `HEAD` to equal the approved base and run `git switch -c codex/faster-direct-handoff` inside that clone.
+3. Apply only the four proposed committed-file edits in the clone and keep the root canonical plan synchronized through bounded GamePlan Updates. Record detailed timing provenance and limitations only in the allowed Phase H report.
+4. From `.gameplan/tmp/phase-h/pr-worktree`, run `$files = Get-ChildItem -LiteralPath 'skills/clean-handoff' -Recurse -File -Filter '*.mjs' | Sort-Object FullName; foreach ($file in $files) { node --check $file.FullName; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }`; `node --test skills/clean-handoff/tests/*.test.mjs`; `node skills/clean-handoff/scripts/clean-handoff.mjs --help`; and `git diff --check`.
+5. From the workspace root, verify the local validator SHA-256 remains `5347a0a09cfb546bba1c0d1a30dae0a233d9a05f57bd4e7877155c588bcdabf7`; create `.gameplan/tmp/phase-h/venv`; run `.gameplan/tmp/phase-h/venv/Scripts/python.exe -m pip install --disable-pip-version-check --requirement .gameplan/tmp/phase-h/pr-worktree/requirements-validation.txt`; then run `.gameplan/tmp/phase-h/venv/Scripts/python.exe C:/Users/robby/.codex/skills/.system/skill-creator/scripts/quick_validate.py .gameplan/tmp/phase-h/pr-worktree/skills/clean-handoff`.
+6. From `.gameplan/tmp/phase-h/pr-worktree`, compare every runtime `.mjs` blob with the approved base; inspect the complete diff; require the exact four-file committed allowlist above; run `git add -- GAMEPLAN.md README.md skills/clean-handoff/references/workflows/new-task.md skills/clean-handoff/tests/package-boundary.test.mjs`; prove the staged allowlist is exact; run `git diff --cached --check`; commit once with `git commit -m "Speed up Direct Handoff orchestration"`; and push once with `git push --set-upstream origin codex/faster-direct-handoff`.
+7. Create `.gameplan/tmp/phase-h/pr-body.md` summarizing measured evidence, the bounded parallel preflight, the explicit same-checkout tradeoff, validation, and limitations; run `gh pr create --repo robertbradley-oss/clean-handoff --base main --head codex/faster-direct-handoff --title "Speed up Direct Handoff orchestration" --body-file .gameplan/tmp/phase-h/pr-body.md` exactly once.
+8. Identify the CI run for the exact PR head with `gh run list --repo robertbradley-oss/clean-handoff --workflow CI --commit <exact-head> --json databaseId,headSha,status,conclusion --limit 10`; run `gh run watch <matching-run-id> --repo robertbradley-oss/clean-handoff --exit-status`; and inspect all six jobs. On any failure or ambiguity, stop with the slice active and do not push a repair without an approved amendment.
+9. After all criteria pass, apply one closure Update to the root and PR-branch `GAMEPLAN.md`, finalize the report, Phase H footprint, and compiled footprint, commit only the closing `GAMEPLAN.md` change with `git commit -m "Record Direct Handoff latency validation"`, push normally, and require the new final-head six-cell CI run to pass.
+10. Verify the final PR metadata and exact diff, remove only the resolved `.gameplan/tmp/phase-h/` tree after validating its absolute path remains inside the workspace, recheck protected status, and leave the ready PR open and unmerged.
+
+Validation authorization: The user's exact approval grants standing authority only for the allowed workspace writes; the bounded temporary clone and Python environment; the exact local commands; one branch, up to two scoped commits, and normal pushes; one ready PR creation; CI observation; and exact task-temporary cleanup above. It grants no runtime change, installed-skill mutation, task creation, current-checkout branch/index change, base-branch mutation, PR merge, release, tag, publication, deletion outside the task-temporary tree, force-push, automatic repair, or retry of a failed external mutation.
+
+Evidence state: Active. The read-only latency observations support the direction; implementation and PR evidence remain pending in `.gameplan/reports/2026-07-25-phase-h-direct-handoff-latency.md`.
 
 ## Historical Retained-Repository Deletion Record
 
@@ -433,6 +498,16 @@ Validate syntax, official skill packaging, focused regression, supported platfor
 
 Complete when every criterion has direct evidence, all footprints and cleanup obligations are resolved, the standalone installation is proven from its intended distribution source, and the GamePlan is closed through one targeted Update.
 
+### Phase H — Direct Handoff Latency Reduction and Pull Request
+
+- Preserve the completed two-workflow product and improve only Direct Handoff orchestration.
+- Overlap saved-project listing with the minimum live workspace and GamePlan inspection needed to assemble the eight-field handoff.
+- Make the source inspection boundary explicit so ordinary handoffs do not trigger repository-wide inventory, historical-evidence reads, or validation runs without a concrete uncertainty.
+- Keep isolated worktrees as the Git default and expose saved-project-direct execution only as an explicit user choice with a clear shared-checkout tradeoff.
+- Prove the behavioral contract through focused tests and the complete standalone validation gate, then publish the bounded change as one ready PR without merging it.
+
+Complete when the proposed slice's seven criteria have direct evidence, the PR's final exact head passes all six CI jobs, runtime/helper bytes remain unchanged, provenance is finalized, temporary artifacts are absent, and the ready PR remains open for review.
+
 ## Current State
 
 ### Completed
@@ -454,7 +529,7 @@ Complete when every criterion has direct evidence, all footprints and cleanup ob
 
 ### Active
 
-- None.
+- Phase H is approved and active within the exact latency-and-PR slice above. No implementation mutation has started.
 
 ### Blocked
 
@@ -462,11 +537,11 @@ Complete when every criterion has direct evidence, all footprints and cleanup ob
 
 ## Task Footprint
 
-- Finalized compiled: `.gameplan/footprints/2026-07-21-clean-handoff-standalone-compiled.md`; finalized source 15 is `.gameplan/footprints/2026-07-22-skills-repository-publication.md`.
+- Active compiled: `.gameplan/footprints/2026-07-21-clean-handoff-standalone-compiled.md`; it now incorporates the active Phase H source footprint.
 
 ## Next Move
 
-Use `robertbradley-oss/clean-handoff` as the sole canonical implementation authority and `robertbradley-oss/skills/clean-handoff` only as its validated umbrella distribution. Preserve `C:/Users/robby/Documents/Codex/2026-07-22/clean-handoff-public-recovery/` until a separately approved retention policy provides equivalent recovery. No execution slice is currently approved.
+Run the Phase H preflight against exact canonical main `b61e474ffcd26e0ef1d44abf7ab6eb69f220c33a`, begin the approved footprint, and execute only the bounded Direct Handoff workflow/documentation/test PR.
 
 ## Open Questions
 
@@ -480,11 +555,14 @@ Use `robertbradley-oss/clean-handoff` as the sole canonical implementation autho
 - Resolved: Checkpoint, Resume, and Status are retired from the core package and recoverable from the Phase F archive; create no optional skill unless a future demonstrated need is separately approved.
 - Resolved: no current standalone consumer requires v2 receipts, packets, finalizations, sideband transfer storage, or unfinished v0.8 recovery; historical and installed v0.8 evidence remains retained.
 - Resolved: Direct Handoff targets the current saved project through exact root matching; arbitrary saved-project selection is outside the completed product contract.
+- Retained uncertainty: the read-only timings identify source orchestration as the actionable package-level target, but client-owned Git worktree provisioning and model/tool scheduling vary by environment; Phase H must not claim an unmeasured end-to-end latency guarantee.
 
 ## Decisions
 
 ### Governing standalone-skill decisions
 
+- 2026-07-25 — Approve the complete proposed Phase H Direct Handoff latency-and-PR slice exactly as recorded, including its four-file PR boundary, temporary clone and validator environment, branch, commits, ready PR, CI observation, cleanup, and explicit prohibitions.
+- 2026-07-25 — At the user's request, propose one bounded Phase H pull request to reduce Direct Handoff latency by overlapping independent read-only preflight work, limiting ordinary source inspection, preserving the isolated-worktree default, and documenting an explicit saved-project-direct opt-in. Because the exact files, validation, branch, push, PR, and cleanup boundary were inferred, no execution is approved until the user explicitly approves the complete proposed slice.
 - 2026-07-24 — Publish and retain the canonical root `GAMEPLAN.md` in `robertbradley-oss/clean-handoff` as durable project context. Keep `.gameplan/` evidence and private/local artifacts outside the public repository by default.
 - 2026-07-23 — Close the Skills-repository publication after PR #2, exact-head and merged-main three-OS CI, fresh-clone validation, canonical/imported/installed manifest equality, protected-state proof, and exact task-temp cleanup. Keep `robertbradley-oss/clean-handoff` as sole implementation authority and the umbrella repository as distribution only.
 - 2026-07-23 — Approve the exact Skills-repository local-validation cache amendment: remove only the failed task-owned cache, rerun the complete local gate with ordinary Post Clean compilation, remove only its generated task-owned bytecode cache before boundary inspection, and otherwise preserve the approved product, validation, and external-mutation boundary unchanged.
@@ -628,4 +706,4 @@ Use `robertbradley-oss/clean-handoff` as the sole canonical implementation autho
 
 ## Last Refreshed
 
-2026-07-24 — The user approved publishing the canonical root `GAMEPLAN.md` in the public Clean Handoff repository while retaining `.gameplan/` evidence and private/local artifacts outside the repository. No execution slice is approved.
+2026-07-25 — Recorded the user's exact approval of the complete Phase H Direct Handoff latency-and-PR slice. Phase H is active and bounded; implementation evidence is pending.
