@@ -39,6 +39,13 @@ task in that project.
 - The helper does not create the task.
 - The agent makes exactly one Codex task-creation call and never retries
   automatically.
+- When the client permits independent read-only calls, saved-project discovery
+  and the minimum live workspace inspection begin concurrently. Ordinary
+  handoffs do not require a repository-wide inventory, historical-evidence
+  traversal, or test run unless material uncertainty requires one.
+- Git projects use an isolated worktree by default. If the user explicitly asks
+  to use the saved project directly, task creation can avoid worktree
+  provisioning, but the source and destination tasks share one checkout.
 - No checkpoint, packet, receipt, cache, finalization record, or replay state is
   created.
 - Missing, unavailable, or ambiguous project identity stops at a clear
@@ -62,6 +69,16 @@ Ask Codex to use the skill explicitly:
 ```text
 Use $clean-handoff to create a Direct Handoff to a new task.
 ```
+
+To opt into the shared-checkout path explicitly:
+
+```text
+Use $clean-handoff to create a Direct Handoff in the saved project directly.
+```
+
+This option can reduce setup work, but it does not guarantee end-to-end
+latency. Use it only when the source task will no longer modify the checkout or
+when shared-checkout coordination is intentional.
 
 Or request copyable text:
 

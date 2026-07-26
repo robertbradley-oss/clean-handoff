@@ -64,7 +64,7 @@ Each write-based lettered phase requires an exact Approved Execution Slice. The 
 
 ## Approved Execution Slice
 
-None approved. The Skills-repository publication slice closed on 2026-07-23 with direct evidence in `.gameplan/reports/2026-07-22-skills-repository-publication.md`.
+None approved. Phase H closed on 2026-07-25 with direct evidence in `.gameplan/reports/2026-07-25-phase-h-direct-handoff-latency.md`; ready PR #2 remains open and unmerged.
 
 ## Historical Retained-Repository Deletion Record
 
@@ -433,6 +433,16 @@ Validate syntax, official skill packaging, focused regression, supported platfor
 
 Complete when every criterion has direct evidence, all footprints and cleanup obligations are resolved, the standalone installation is proven from its intended distribution source, and the GamePlan is closed through one targeted Update.
 
+### Phase H — Direct Handoff Latency Reduction and Pull Request
+
+- Preserve the completed two-workflow product and improve only Direct Handoff orchestration.
+- Overlap saved-project listing with the minimum live workspace and GamePlan inspection needed to assemble the eight-field handoff.
+- Make the source inspection boundary explicit so ordinary handoffs do not trigger repository-wide inventory, historical-evidence reads, or validation runs without a concrete uncertainty.
+- Keep isolated worktrees as the Git default and expose saved-project-direct execution only as an explicit user choice with a clear shared-checkout tradeoff.
+- Prove the behavioral contract through focused tests and the complete standalone validation gate, then publish the bounded change as one ready PR without merging it.
+
+Complete when Phase H's seven criteria have direct evidence, the PR's final exact head passes all six CI jobs, runtime/helper bytes remain unchanged, provenance is finalized, temporary artifacts are absent, and the ready PR remains open for review.
+
 ## Current State
 
 ### Completed
@@ -450,6 +460,7 @@ Complete when every criterion has direct evidence, all footprints and cleanup ob
 - Recovery and public cutover retained complete checksummed recovery for both prior histories and all eleven release assets, published the clean 21-path standalone history at `robertbradley-oss/clean-handoff`, passed all six public CI cells and a default-Windows fresh clone, preserved exact installed-byte identity, moved the plugin-era repository to `clean-handoff-legacy`, retained the private source, and removed only the stale configured marketplace through the supported command. Evidence: `.gameplan/reports/2026-07-22-public-cutover.md`.
 - Final retained-repository deletion re-proved both complete histories and every legacy asset, deleted only `clean-handoff-source` and `clean-handoff-legacy`, confirmed canonical `clean-handoff` is the sole remaining Clean Handoff GitHub repository, retained exact installed bytes and external recovery, preserved all unrelated state, and finalized all task cleanup. Evidence: `.gameplan/reports/2026-07-22-retained-repository-deletion.md`.
 - Skills-repository publication added the exact canonical 15-file distribution to `robertbradley-oss/skills` through PR #2, passed the three-OS pull-request and merged-main CI matrices, passed a complete fresh-clone gate, preserved `robertbradley-oss/clean-handoff` as the sole implementation authority, and finalized task cleanup. Evidence: `.gameplan/reports/2026-07-22-skills-repository-publication.md`.
+- Phase H bounded Direct Handoff source inspection, overlapped independent read-only preflight work, preserved isolated Git worktrees by default, and documented explicit saved-project-direct execution through ready canonical PR #2. The exact four-file change passed local and six-cell CI validation while helper and runtime bytes remained unchanged. Evidence: `.gameplan/reports/2026-07-25-phase-h-direct-handoff-latency.md`.
 - The former v0.8 release GamePlan is superseded as governing strategy; its decision history remains preserved below.
 
 ### Active
@@ -462,11 +473,11 @@ Complete when every criterion has direct evidence, all footprints and cleanup ob
 
 ## Task Footprint
 
-- Finalized compiled: `.gameplan/footprints/2026-07-21-clean-handoff-standalone-compiled.md`; finalized source 15 is `.gameplan/footprints/2026-07-22-skills-repository-publication.md`.
+- Finalized compiled: `.gameplan/footprints/2026-07-21-clean-handoff-standalone-compiled.md`; finalized source 16 is `.gameplan/footprints/2026-07-25-phase-h-direct-handoff-latency.md`.
 
 ## Next Move
 
-Use `robertbradley-oss/clean-handoff` as the sole canonical implementation authority and `robertbradley-oss/skills/clean-handoff` only as its validated umbrella distribution. Preserve `C:/Users/robby/Documents/Codex/2026-07-22/clean-handoff-public-recovery/` until a separately approved retention policy provides equivalent recovery. No execution slice is currently approved.
+Review ready canonical PR #2 and merge it when desired. Merge, installation, release, and umbrella-distribution updates remain unapproved.
 
 ## Open Questions
 
@@ -480,11 +491,15 @@ Use `robertbradley-oss/clean-handoff` as the sole canonical implementation autho
 - Resolved: Checkpoint, Resume, and Status are retired from the core package and recoverable from the Phase F archive; create no optional skill unless a future demonstrated need is separately approved.
 - Resolved: no current standalone consumer requires v2 receipts, packets, finalizations, sideband transfer storage, or unfinished v0.8 recovery; historical and installed v0.8 evidence remains retained.
 - Resolved: Direct Handoff targets the current saved project through exact root matching; arbitrary saved-project selection is outside the completed product contract.
+- Retained uncertainty: the read-only timings identify source orchestration as the actionable package-level target, but client-owned Git worktree provisioning and model/tool scheduling vary by environment; Phase H must not claim an unmeasured end-to-end latency guarantee.
 
 ## Decisions
 
 ### Governing standalone-skill decisions
 
+- 2026-07-25 — Close Phase H after the exact four-file Direct Handoff orchestration PR preserved runtime bytes and safety contracts, passed local and six-cell CI validation, finalized provenance, removed task-temporary state, and left ready PR #2 open and unmerged.
+- 2026-07-25 — Approve the complete proposed Phase H Direct Handoff latency-and-PR slice exactly as recorded, including its four-file PR boundary, temporary clone and validator environment, branch, commits, ready PR, CI observation, cleanup, and explicit prohibitions.
+- 2026-07-25 — At the user's request, propose one bounded Phase H pull request to reduce Direct Handoff latency by overlapping independent read-only preflight work, limiting ordinary source inspection, preserving the isolated-worktree default, and documenting an explicit saved-project-direct opt-in. Because the exact files, validation, branch, push, PR, and cleanup boundary were inferred, no execution is approved until the user explicitly approves the complete proposed slice.
 - 2026-07-24 — Publish and retain the canonical root `GAMEPLAN.md` in `robertbradley-oss/clean-handoff` as durable project context. Keep `.gameplan/` evidence and private/local artifacts outside the public repository by default.
 - 2026-07-23 — Close the Skills-repository publication after PR #2, exact-head and merged-main three-OS CI, fresh-clone validation, canonical/imported/installed manifest equality, protected-state proof, and exact task-temp cleanup. Keep `robertbradley-oss/clean-handoff` as sole implementation authority and the umbrella repository as distribution only.
 - 2026-07-23 — Approve the exact Skills-repository local-validation cache amendment: remove only the failed task-owned cache, rerun the complete local gate with ordinary Post Clean compilation, remove only its generated task-owned bytecode cache before boundary inspection, and otherwise preserve the approved product, validation, and external-mutation boundary unchanged.
@@ -628,4 +643,4 @@ Use `robertbradley-oss/clean-handoff` as the sole canonical implementation autho
 
 ## Last Refreshed
 
-2026-07-24 — The user approved publishing the canonical root `GAMEPLAN.md` in the public Clean Handoff repository while retaining `.gameplan/` evidence and private/local artifacts outside the repository. No execution slice is approved.
+2026-07-25 — Closed Phase H from direct local, PR, CI, runtime-integrity, provenance, and cleanup evidence. Ready canonical PR #2 remains open and unmerged; no execution slice is approved.

@@ -84,6 +84,12 @@ test("the package contains only the two active workflow guides", async () => {
   ]);
   const direct = await fsp.readFile(path.join(skillRoot, "references", "workflows", "new-task.md"), "utf8");
   assert.equal((direct.match(/`create_thread`/gu) ?? []).length, 1);
+  assert.match(direct, /bounded live workspace inspection concurrently/u);
+  assert.match(direct, /Do not inventory the repository/u);
+  assert.match(direct, /isolated worktree by default/u);
+  assert.match(direct, /saved project directly only when the user explicitly requests/u);
+  assert.match(direct, /source and destination tasks modify the same checkout/u);
+  assert.match(direct, /request for speed alone does not select the shared checkout/u);
   assert.match(direct, /exactly once/u);
   assert.match(direct, /Do not retry automatically/u);
   assert.match(direct, /creates no persistent transfer state|do not create local recovery state/iu);
