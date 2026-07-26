@@ -27,10 +27,13 @@ async function workspace(t) {
   return root;
 }
 
-function run(root, input) {
+function run(root, input, options = {}) {
+  const json = Buffer.from(JSON.stringify(input), "utf8");
   const result = spawnSync(process.execPath, [cli, "prepare", "--project-root", root], {
     encoding: "utf8",
-    input: JSON.stringify(input),
+    input: options.leadingBom
+      ? Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), json])
+      : json,
     windowsHide: true,
     maxBuffer: 1024 * 1024,
   });
@@ -78,6 +81,19 @@ test("public CLI exposes only prepare and bounded help", () => {
   assert.match(commandHelp.stdout, /clean-handoff\/context-input\/v1/u);
   assert.match(commandHelp.stdout, /one task-tool call/u);
   assert.match(commandHelp.stdout, /permits no task-tool call/u);
+});
+
+test("public CLI accepts one leading UTF-8 byte-order mark from Windows callers", async (t) => {
+  const root = await workspace(t);
+  const direct = run(root, {
+    schema: "clean-handoff/context-input/v1",
+    mode: "direct",
+    projects: [{ projectId: "saved-project", projectKind: "local", path: root }],
+    handoff: handoff(),
+  }, { leadingBom: true });
+  assert.equal(direct.status, 0);
+  assert.equal(direct.output.ok, true);
+  assert.equal(direct.output.result.project_selection.state, "exact");
 });
 
 test("public CLI failures stay bounded and hide raw input", async (t) => {
