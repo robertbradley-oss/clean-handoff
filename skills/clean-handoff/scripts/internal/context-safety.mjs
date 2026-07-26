@@ -22,12 +22,15 @@ export function strictUtf8(value, options = {}) {
   if (!Number.isSafeInteger(maximum) || maximum < 0 || value.length > maximum) {
     throw new SafeFailure("input-too-large", `${label} exceeds the permitted size.`);
   }
-  if (value.subarray(0, UTF8_BOM.length).equals(UTF8_BOM)) {
+  const hasLeadingBom = value.subarray(0, UTF8_BOM.length).equals(UTF8_BOM);
+  if (hasLeadingBom && options.allowLeadingBom !== true) {
     throw new SafeFailure("invalid-utf8", `${label} must not contain a byte-order mark.`);
   }
   let text;
   try {
-    text = new TextDecoder("utf-8", { fatal: true }).decode(value);
+    text = new TextDecoder("utf-8", { fatal: true }).decode(
+      hasLeadingBom ? value.subarray(UTF8_BOM.length) : value,
+    );
   } catch {
     throw new SafeFailure("invalid-utf8", `${label} is not valid UTF-8.`);
   }
@@ -38,7 +41,7 @@ export function strictUtf8(value, options = {}) {
 }
 
 export function parseStrictJson(bytes, options = {}) {
-  const text = strictUtf8(bytes, options);
+  const text = strictUtf8(bytes, { ...options, allowLeadingBom: true });
   try {
     return JSON.parse(text);
   } catch {
