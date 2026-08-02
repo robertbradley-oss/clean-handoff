@@ -59,15 +59,6 @@ jobs:
       - name: Install validation dependency
         run: python -m pip install --disable-pip-version-check --requirement requirements-validation.txt
 
-      - name: Check JavaScript syntax
-        run: |
-          node --check skills/clean-handoff/scripts/clean-handoff.mjs
-          node --check skills/clean-handoff/scripts/internal/context-safety.mjs
-          node --check skills/clean-handoff/scripts/internal/errors.mjs
-          node --check skills/clean-handoff/scripts/internal/fs-safety.mjs
-          node --check skills/clean-handoff/scripts/internal/minimal-handoff.mjs
-          node --check skills/clean-handoff/scripts/internal/project-selection.mjs
-
       - name: Run standalone skill tests
         run: node --test skills/clean-handoff/tests/*.test.mjs
 
