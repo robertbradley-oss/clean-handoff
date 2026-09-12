@@ -4,26 +4,9 @@
 
 # Clean Handoff
 
-Move the minimum useful working context into one new Codex task—or produce
-copyable handoff text—without transferring approval.
+Clean Handoff is a Codex skill for continuing work in a new task. Invoke it with `$clean-handoff`. It can create a task directly or return handoff text to copy.
 
-Clean Handoff is a self-contained Codex user skill invoked as `$clean-handoff`.
-Its active product has two workflows: Direct Handoff and Portable Handoff.
-
-## Why it exists
-
-Long sessions accumulate decisions, constraints, commands, test results, repository state, and unfinished work. A raw transcript is too noisy, while an informal summary can quietly invent or omit facts.
-
-Clean Handoff prepares a compact, human-readable summary containing only:
-
-- the objective;
-- completed work;
-- remaining work;
-- important decisions;
-- repository state;
-- validation state;
-- risks;
-- the immediate next action.
+The summary includes the objective, completed and remaining work, decisions, repository and validation state, risks, and the next action. Handoff text does not transfer approval.
 
 The receiver must inspect its live repository and live canonical `GAMEPLAN.md`
 before acting. Handoff text is context only and never carries approval.
