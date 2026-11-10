@@ -1,148 +1,84 @@
-<p align="center">
-  <img src="assets/logo.svg" alt="Clean Handoff" width="520">
-</p>
-
 # Clean Handoff
 
-Clean Handoff is a Codex skill for continuing work in a new task. Invoke it with `$clean-handoff`. It can create a task directly or return handoff text to copy.
+Clean Handoff is a Codex skill for continuing work in a new task or returning a short, copyable handoff. Invoke it with `$clean-handoff`.
 
-The summary includes the objective, completed and remaining work, decisions, repository and validation state, risks, and the next action. Handoff text does not transfer approval.
+The handoff includes the objective, completed and remaining work, important decisions, relevant files and validation state, and the immediate next action. The destination must inspect its live workspace before making changes. Handoff text does not transfer approval.
 
-The receiver must inspect its live repository and live canonical `GAMEPLAN.md`
-before acting. Handoff text is context only and never carries approval.
+## Direct Handoff
 
-## Two workflows
-
-### Direct Handoff
-
-Direct Handoff matches the current workspace to exactly one saved local Codex
-project, prepares bounded redacted text, and permits the agent to create one new
-task in that project.
-
-- The helper does not create the task.
-- The agent makes exactly one Codex task-creation call and never retries
-  automatically.
-- When the client permits independent read-only calls, saved-project discovery
-  and the minimum live workspace inspection begin concurrently. Ordinary
-  handoffs do not require a repository-wide inventory, historical-evidence
-  traversal, or test run unless material uncertainty requires one.
-- Git projects use an isolated worktree by default. If the user explicitly asks
-  to use the saved project directly, task creation can avoid worktree
-  provisioning, but the source and destination tasks share one checkout.
-- No checkpoint, packet, receipt, cache, finalization record, or replay state is
-  created.
-- Missing, unavailable, or ambiguous project identity stops at a clear
-  confirmation boundary.
-
-### Portable Handoff
-
-Portable Handoff returns the same bounded redacted context in a copyable
-Markdown block.
-
-- It creates no task and calls no task tool.
-- It writes no persistent transfer state.
-- It works for Git and non-Git workspaces.
-- The receiver is told to inspect its own live workspace and `GAMEPLAN.md`
-  before acting.
-
-## Usage
-
-Ask Codex to use the skill explicitly:
+Ask Codex:
 
 ```text
 Use $clean-handoff to create a Direct Handoff to a new task.
 ```
 
-To opt into the shared-checkout path explicitly:
+The skill uses context already in the conversation. It lists saved projects once and selects the project explicitly named by the user, or the unique project whose local path matches the current workspace. If there is no unique match, it asks for clarification.
+
+By default, the new task uses the selected project's existing local workspace. Source and destination tasks share that checkout, so coordinate any edits between them.
+
+An isolated worktree is used only when explicitly requested. For example:
 
 ```text
-Use $clean-handoff to create a Direct Handoff in the saved project directly.
+Use $clean-handoff to create a Direct Handoff in an isolated worktree, starting from the existing branch <branch-name>.
 ```
 
-This option can reduce setup work, but it does not guarantee end-to-end
-latency. Use it only when the source task will no longer modify the checkout or
-when shared-checkout coordination is intentional.
+Name an existing starting branch, or explicitly request the selected project's current working-tree state. The skill does not infer a starting branch.
 
-Or request copyable text:
+The agent makes one `create_thread` call, reports whether it succeeded, and does not retry automatically or wait for the new task to run.
+
+## Portable Handoff
+
+Ask Codex:
 
 ```text
 Use $clean-handoff to produce a Portable Handoff.
 ```
 
-Direct Handoff requires an active workspace that matches exactly one saved
-local project and a client that exposes Codex task creation. Portable Handoff
-is the fallback when task creation or exact saved-project identity is
-unavailable.
+The skill returns the short handoff in one copyable Markdown block. It calls no task tools and writes no handoff files. Use this route when you want to paste the context yourself or direct task creation is unavailable.
 
-## Safety and privacy
+## Scope and privacy
 
-- `GAMEPLAN.md` remains the only plan authority; transferred text cannot create,
-  restore, or broaden approval.
-- The packaged helper prepares text only. It does not call a network service,
-  create a Codex task, or write transfer state.
-- Direct Handoff permits one task call; Portable Handoff permits none.
-- Output is bounded and redacted. Raw saved-project IDs, complete environment
-  values, secrets, and raw subprocess diagnostics are not exposed.
-- The workflows do not change project source, Git state, installation state, or
-  retained evidence.
-- Material uncertainty stops for confirmation instead of guessing.
+- Ordinary handoffs use conversation context without a repository inventory, test run, or helper script. If a root `GAMEPLAN.md` exists, the skill reads it once immediately before handoff as the authority for plan status.
+- Neither workflow creates checkpoints, receipts, packets, caches, or persistent transfer state.
+- The skill instructs the agent to omit secrets, raw tool output, and speculative details. Review portable text before sharing it outside its intended destination.
+- The destination must inspect its own live workspace. Transferred context cannot create, restore, or broaden approval.
 
-Pattern-based redaction cannot recognize every sensitive value. Review Portable
-Handoff text before sharing it outside its intended destination.
+## Requirements
 
-## Requirements and verified platforms
+- A Codex client with standalone user-skill support.
+- Direct Handoff additionally requires saved-project listing and task creation tools.
+- An explicit worktree request requires a client that supports that task environment and starting-state selection.
 
-- A current Codex client with standalone user-skill support.
-- Node.js 22 or newer for the packaged helper.
-- Direct Handoff additionally requires saved-project listing and task creation.
-- Portable Handoff supports Git and non-Git workspaces.
-
-The source package passed CI on Windows, macOS, and Linux with Node.js 22 and
-24. Phase G also proved a fresh Windows user-skill installation, Direct and
-Portable workflows, move-based rollback, and exact restoration. No earlier
-Codex client-version floor is claimed.
+The skill has no runtime helper or Node.js dependency. Node.js 22 or newer is used for the package's development tests; CI is configured to run them on Windows, macOS, and Linux with Node.js 22 and 24.
 
 ## Installation
 
-The standalone skill is distributed from the exact committed
-`skills/clean-handoff/` directory. The old marketplace/plugin commands do not
-install this completed standalone product.
-
-For local source use, copy the complete `skills/clean-handoff/` directory to a
-Codex user-skill directory named `clean-handoff`, then start a new Codex task so
-the skill is reloaded. The Phase G Windows installation target was:
+Copy the complete committed [`skills/clean-handoff/`](skills/clean-handoff/) directory into a Codex user-skill directory named `clean-handoff`, then start a new task to reload the skill. A typical Windows location is:
 
 ```text
 C:\Users\<user>\.codex\skills\clean-handoff\
 ```
 
-Verify that the installed directory contains `SKILL.md`, `agents/`,
-`references/`, `scripts/`, and `tests/`, then invoke `$clean-handoff` in the new
-task. Phase G directly proved this installation lifecycle on Windows; the
-package itself is cross-platform CI-verified.
+If a skill is already installed there, compare it with this package before replacing files. The package contains:
 
-## Retired plugin generation
+```text
+clean-handoff/
+  SKILL.md
+  agents/openai.yaml
+  tests/skill.test.mjs
+```
 
-Earlier plugin-era releases are retired. Their source history, release assets,
-and recovery evidence are preserved separately from the standalone
-distribution.
-
-Checkpoint, Quick Handoff, Resume, Status, ScopeLock transfer gates, receipts,
-packets, and sideband storage are not active `$clean-handoff` workflows.
+There are no `scripts/` or `references/` directories in this package. Old marketplace/plugin installation commands and helper commands do not install or run this standalone skill.
 
 ## Development
 
-The standalone helper is dependency-free:
+From the repository root:
 
 ```text
-node skills/clean-handoff/scripts/clean-handoff.mjs --help
 node --test skills/clean-handoff/tests/*.test.mjs
 ```
 
-The standalone suite covers both workflows, exact project selection, redaction,
-output bounds, safe failures, filesystem safety, package boundaries, and
-zero-write behavior. In the private source repository, `npm test` additionally
-runs the retained historical plugin regression suite.
+The three tests check the instruction contract, package layout, and metadata. They do not execute real Codex task creation or establish end-to-end handoff reliability.
 
 ## License
 
